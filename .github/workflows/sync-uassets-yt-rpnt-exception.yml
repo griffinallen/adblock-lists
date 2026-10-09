@@ -38,6 +38,12 @@ jobs:
             git push --force-with-lease origin HEAD:auto/sync-yt-rpnt-exception
           fi
 
+      - name: Close existing PR if present
+        run: |
+          gh pr close auto/sync-yt-rpnt-exception --delete-branch=false 2>/dev/null || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Open PR if changed
         run: |
           gh pr create \
