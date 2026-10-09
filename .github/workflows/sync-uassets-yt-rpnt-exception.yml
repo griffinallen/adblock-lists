@@ -34,7 +34,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add brave-unbreak.txt
             git commit -m "Sync brave-unbreak.txt with uAssets quick-fixes"
-            git push --force-with-lease origin HEAD:auto/sync-uassets-quickfix
+            git push --force-with-lease origin HEAD:auto/sync-yt-rpnt-exception
           fi
 
       - name: Open PR if changed
@@ -43,6 +43,6 @@ jobs:
             --title "Sync brave-unbreak.txt with uAssets quick-fixes" \
             --body "Automated update after a change to the matching \`rpnt\` rule in uAssets \`filters/quick-fixes.txt\`." \
             --base master \
-            --head auto/sync-uassets-quickfix || true
+            --head auto/sync-yt-rpnt-exception || true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
