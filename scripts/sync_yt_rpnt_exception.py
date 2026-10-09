@@ -12,7 +12,7 @@ BLOCK_RE = re.compile(
     r"^! BEGIN uAssets/yt-rpnt AUTO[-=]SYNC[ \t\r]*$.*?^! END uAssets/yt-rpnt AUTO[-=]SYNC[ \t\r]*$",
     re.S | re.M,
 )
-UPSTREAM_URL = "https://raw.githubusercontent.com/griffinallen/uAssets/test-sync/filters/quick-fixes.txt"
+UPSTREAM_URL = "https://raw.githubusercontent.com/griffinallen/uAssets/master/filters/quick-fixes.txt"
 PREFIX = "www.youtube.com##+js(rpnt, script"
 
 def main() -> None:
