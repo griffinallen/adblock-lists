@@ -1,14 +1,9 @@
-# NOTE: scheduled workflows only run from the repo's DEFAULT branch.
-# On test-sync this workflow only fires via the manual "Run workflow"
-# button (workflow_dispatch). Merge to master later to enable the cron.
-# On a GitHub runner the sibling ../uAssets clone does not exist, so the
-# sync script falls back to griffinallen/uAssets @ test-sync via raw URL.
-name: Sync uAssets quick-fix exception
+name: Sync uAssets YT rpnt exception
 
 on:
   schedule:
-    - cron: "17 */3 * * *" # every 3 hours (inactive only on non-default branches)
-  workflow_dispatch: # manual run button — works on test-sync
+    - cron: "0 */3 * * *"
+  workflow_dispatch: # manual run button
 
 permissions:
   contents: write
@@ -24,17 +19,15 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Regenerate exception
-        run: python scripts/sync_quickfix_exception.py
+      - name: Regenerate yt-rpnt exception
+        run: python scripts/sync_yt_rpnt_exception.py
 
       - name: Open PR if changed
-        uses: peter-evans/create-pull-request@v6
-        with:
-          branch: auto/sync-uassets-quickfix
-          base: test-sync # keep test-loop PRs on test-sync; remove to target master
-          commit-message: "Sync brave-unbreak.txt with uAssets quick-fixes"
-          title: "Sync brave-unbreak.txt with uAssets quick-fixes"
-          body: |
-            Automated update after a change to the matching `rpnt` rule in
-            uAssets `filters/quick-fixes.txt`.
-          delete-branch: true
+        run: |
+          gh pr create \
+            --title "Sync brave-unbreak.txt with uAssets quick-fixes" \
+            --body "Automated update after a change to the matching \`rpnt\` rule in uAssets \`filters/quick-fixes.txt\`." \
+            --base master \
+            --head auto/sync-uassets-quickfix || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
