@@ -34,6 +34,7 @@ jobs:
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add brave-unbreak.txt
             git commit -m "Sync brave-unbreak.txt with uAssets quick-fixes"
+            git fetch origin auto/sync-yt-rpnt-exception || true  # give force-with-lease a tracking ref to verify against
             git push --force-with-lease origin HEAD:auto/sync-yt-rpnt-exception
           fi
 
