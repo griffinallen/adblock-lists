@@ -22,6 +22,21 @@ jobs:
       - name: Regenerate yt-rpnt exception
         run: python scripts/sync_yt_rpnt_exception.py
 
+      # gh pr create cannot push uncommitted changes: without this step the
+      # regenerated brave-unbreak.txt is lost when the job ends and the PR is
+      # created from whatever the auto/ branch already contains.
+      - name: Commit and push to auto branch
+        run: |
+          if git diff --quiet -- brave-unbreak.txt; then
+            echo "No change — nothing to push"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add brave-unbreak.txt
+            git commit -m "Sync brave-unbreak.txt with uAssets quick-fixes"
+            git push --force-with-lease origin HEAD:auto/sync-uassets-quickfix
+          fi
+
       - name: Open PR if changed
         run: |
           gh pr create \
