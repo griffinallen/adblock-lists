@@ -9,11 +9,27 @@ TARGET = Path(__file__).resolve().parent.parent / "brave-unbreak.txt"
 BEGIN = "! BEGIN uAssets/yt-rpnt AUTO-SYNC"
 END = "! END uAssets/yt-rpnt AUTO-SYNC"
 BLOCK_RE = re.compile(
-    r"^! BEGIN uAssets/yt-rpnt AUTO[-=]SYNC[ \t\r]*$.*?^! END uAssets/yt-rpnt AUTO[-=]SYNC[ \t\r]*$",
+    r"^! BEGIN uAssets/yt-rpnt AUTO[-=]SYNC[ \t\r]*$.*?^! END uAssets/yt-rpnt AUTO[-=]SYNC[ \t]*(?=\r?$)",
     re.S | re.M,
 )
-UPSTREAM_URL = "https://raw.githubusercontent.com/griffinallen/uAssets/master/filters/quick-fixes.txt"
+UPSTREAM_URL = "https://raw.githubusercontent.com/ublockorigin/uAssets/master/filters/quick-fixes.txt"
 PREFIX = "www.youtube.com##+js(rpnt, script"
+# Blocking and exception forms of the rpnt rule, used to narrow normalization
+RPNT_VARIANTS = (PREFIX, PREFIX.replace("##", "#@#", 1))
+
+def normalize(text: str) -> str:
+    lines = []
+    for line in text.splitlines():
+        s = line.strip()
+        if s.startswith("!"):
+            s = s.lstrip("!").strip()
+        if s.startswith(RPNT_VARIANTS):
+            s = s.replace("#@#", "##", 1)
+        elif "AUTO=SYNC" in s:
+            s = s.replace("AUTO=SYNC", "AUTO-SYNC")
+        lines.append(s)
+    return "\n".join(lines)
+
 
 def main() -> None:
     try:
@@ -42,7 +58,7 @@ def main() -> None:
     # Replacer function keeps re.sub from interpreting backslashes / "$1" in the rule
     new_text = BLOCK_RE.sub(lambda _: block, text, count=1)
 
-    if new_text == text:
+    if normalize(new_text) == normalize(text):
         return
     with TARGET.open("w", encoding="utf-8", newline="") as f:
         f.write(new_text)
