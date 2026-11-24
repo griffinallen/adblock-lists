@@ -3,4 +3,24 @@
 ! Only for Nightly and Beta channels.
 ! Expires: 2 days
 !
-
+macaly.com,thingsboard.io###cc-main
+hookshot.pro###consent-banner
+ritani.com###cookie-info-banner
+collage-shop.jp###cookieBox
+token2.com###cookieNotice
+nexusjobs.com###cookienotice_notice
+cene-stupar.si###nc-cookies-modal
+westfalia.de###website_cookies_bar
+80eight.io##.bottom-0.fixed
+ruhrtopcard.de##.cc
+lashbrookdesigns.com##.consent-banner
+casino.us##.cookie-banner
+acrylglas.ch##.cookie-disclaimer
+trike-x-press.de##.cookie-permission-container
+gruposura.com##.cookies-container
+intersport.mk##.cookiesPartial
+safe.global##.right-4.fixed
+goldenscissors.london##[aria-label="Cookie preferences"]
+uret.se##app-cookie-consent
+newmods.org##div#bottomInfoBar
+heospace.com##div[fs-consent-element]
