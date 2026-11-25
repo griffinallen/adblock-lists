@@ -2572,6 +2572,7 @@ entrepreneur.com##.adbox
 entrepreneur.com###anchorcontainer
 ! dailymotion.com
 ||dmads.dailymotion.com^
+||dmxleo.dailymotion.com/cdn/manifest/video/*.m3u8*&eb=
 dailymotion.com##.WatchingDiscovery__adSection___eLtfR
 dailymotion.com##div[class^="DisplayAd"]
 ! theepochtimes.com
@@ -3261,6 +3262,7 @@ cbssports.com,nowthisnews.com,popsugar.com,scout.com,seeker.com,thedodo.com,thri
 ! cbssports.com
 cbssports.com##.skybox-top-wrapper
 ! Twitter ad cosmetic element
+x.com##[id^="urt"]>ul>li:has([class*="data-ad-disclosure"])
 twitter.com,x.com##.promoted-account
 twitter.com,x.com##.promotion
 twitter.com,x.com##.stream-item-group-start[label="promoted"]
@@ -4732,6 +4734,9 @@ eurosport.com##.reform-top-container
 ! weather.com
 .privacydatanotice.
 ||weather.com/*.medalliasurvey.
+! 1337
+/ma.js^$script,domain=1337x.*|x1337x.*|1337x.ninjaproxy1.com|1337x.st|1337x.to|x1337x.cc|x1337x.eu|x1337x.se|x1337x.ws
+/mm.js^$script,domain=1337x.*|x1337x.*|1337x.ninjaproxy1.com|1337x.st|1337x.to|x1337x.cc|x1337x.eu|x1337x.se|x1337x.ws
 ! stuff.co.nz
 stuff.co.nz##.header-container
 stuff.co.nz##.horizontal-ad-slot
